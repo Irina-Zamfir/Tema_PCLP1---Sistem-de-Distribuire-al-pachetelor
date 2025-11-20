@@ -1,0 +1,221 @@
+Zamfir Irina-Maria
+313CC
+
+Cat a durat implementarea cerintelor: 
+Cerinta 1 -- aprox 4 ore
+Cerinta 2 -- aprox o ora
+Cerinta 3 -- aprox 30 de minute
+Cerinta 4 -- aprox 30 de minute
+Cerinta 5 -- aprox 2 ore 
+Cerinta 6 -- aprox o ora 
+Cerinta 7 -- 30 de minute 
+
+Biblioteci 
+- stdio.h
+- stdlib.h - pentru alocarea dinamica 
+- string.h - pentru utilizarea functiilor pentru sirurie de caractere
+- ctype.h - pentru utilizarea functiei isalnum;
+
+Definirea structurilor cartier, pachet si postas cu campurile specificate; 
+
+Main 
+- declar variabila cerinta, variabilele pentru numarul cartierelor (nrC) si
+pentru numarul pachetelor (nrP) si vectorii de structuri : cartiere[], 
+pachete[] si postasi[];
+- citesc cerinta;
+- pentru fiecare cerinta apelez functia de citire; 
+- pentru cerinta 1 apelez functia de afisare 'afisare_c1';
+- pentru cerintele de la 2 la 7 extrag datele din adresa pachetelor, apeland 
+functia de extragere; 
+- pentru cerinta 2 apelez functia de afisare 'afisare_c2';
+- pentru functiile de la 3 la 7 apelez functia de distributie a pachetelor 
+(distributie), iar pentru cerinta 3 afisez functia de afisare 'afisare_c3_c4';
+- pentru functiile de la 4 la 7 apelez functia de sortare a pachetelor postasilor
+(sortare), iar pentru cerinta 4 apelez functia de afisare 'afisare_c3_c4';
+- pentru functiile de la 5 la 7 codific mesajele fiecarui pachet apeland
+functia care inverseaza cuvintele si elimina semnele de punctuatie din mesajul
+pachetelor (inversare_text) si apoi codific mesajul (codificare_mesaj);
+- pentru cerinta 5 apelez functia de afisare 'afisare_c5';
+- pentru cerinta 6 apelez functia de afisare 'áfisare_c6' in cadrul careia se
+gaseste functia 'alterare_cod' (iar in cadrul acesteia functia 
+'algoritm_alterare_cod') prin intermediul careia se altereaza codurile pachetelor
+care au cel putin o cifra asemanatoare cu id-ul postasului care livreaza
+pachetul respectiv; 
+- pentru cerinta 7 apelez functia de afisare 'áfisare_c7' in cadrul careia se
+gaseste functia 'calculare_scor' care verifica daca postasul modifica codul 
+pachetelor sale si apoi ii calculeaza scorul acestuia, care este ulterior afisat;
+- eliberez memoria pentru sirurile de caractere ce reprezinta numele cartierelor 
+si mesajul pachetelor; 
+
+Despre functiile de afisare: 
+- functiile de afisare pentru cerintele 1->5 sunt strict functii care afiseaza 
+datele cerute de cerinta;
+- functiile de afisare pentru cerintele 6 si 7 functioneaza ca niste subprograme
+care pe langa afisarea ceruta, apeleaza si alte functii pentru a calcula diverse 
+variabile;
+
+Cerinta 1 
+- in mail apelez functia 'citire' si apoi functia de afisare pentru cerinta 1
+(afisare_c1);
+- functia 'citire' are ca parametrii numarul de cartiere (*nrC - transmis ca 
+pointer, pentru a face modificari direct la adresa de memorie), numarul de 
+pachete (*nrP - transmis ca pointer, pentru a face modificari direct la adresa
+de memorie), vectorul de structuri cartier cartiere[] si vectorul de structuri 
+pachet pachete[];
+- citesc nrC si apoi pentru fiecare cartier: completez id-ul cartierului 
+(cartiere[indice].idC), aloc dinamic memorie pentru sirul de caractere ce 
+reprezinta numele cartierului, citesc cartiere[indice].nume, realoc dinamic 
+memoria acestui sir astfel incat spatiul alocat sa fie exact cel necesar si 
+marchez sfarsitul sirului;
+- citesc nrP si apoi pentru fiecare pachet: completez id-ul pachetului
+(pachete[indice].idP), citesc vectorul adresa, prioritatea si greutatea
+pachetului; - aloc dinamic memorie pentru sirul de caractere ce reprezinta
+mesajul pachetului, citesc pachete[indice].mesaj, realoc dinamic memoria 
+acestui sir astfel incat spatiul alocat sa fie exact cel necesar si marchez
+sfarsitul sirului;
+
+Cerinta 2 
+- in main scriu un for pentru a parcurge pachetele, iar la fiecare pachet 
+apelez functia 'extragere' - apoi apelez functia de afisare pentru cerinta 2
+(afisare_c2);
+- functia 'extragere' are ca paramentru o structura de tip pachet (p - copie
+a pachete[indice]) si returneaza acelasi p cu campurile idC, strada si numar 
+completate;
+- in functie folosesc o variabila auxiliara (pdoi) pentru a calcula puterile
+lui 2 corespunzatoare bitilor (p.idC - bitii de la 0 la 4, pozitiile in 
+vector de la 0 la 4 ; p.strada - bitii de la 0 la 4, pozitiile de la 5 la 9 ;
+p.numar - bitii de la 0 la 7, pozitiile de la 10 la 17);
+- in fiecare dintre cele 3 for-uri se gaseste o formula de tipul : 
+p.var = p.var + p.adresa[i]*pdoi;  
+      - daca valoarea din vector este 1 atunci la valorea variabilei se 
+        aduna puterea lui 2 corespunzatoare, iar in caz contrar se aduna 0;
+- pdoi se inmulteste cu 2 de fiecare data; -inainte de fiecare for este 
+initializat cu 1;
+
+Cerinta 3 
+- in main apelez functia 'distributie' - apoi apelez functia de afisare pentru 
+cerinta 3 (afisare_c3_c4);
+- pentru cerintele 3 si 4 am o singura functie de afisare, deoarece ambele cer 
+afisarea acelorasi date;
+- functia 'distribuitie' are ca parametrii numarul de cartiere care este egal
+cu cel de postasi (nrC - copie a variabilei nrC), numarul de pachete (nrP - 
+copie a variabilei nrP), vectorul de structuri pachet pachete[] si vectorul de 
+structuri postas postasi[];
+- completez id-urile postasilor (postasi[indice].idC), care sunt aceleasi cu 
+id-urile cartierelor, si initializez numarul de pachete livrate de fiecare 
+postas cu 0 (postasi[indice].nP);
+- parcurg vectorul de pachete cu un for de la 0 la nrP-1, in care mai intai 
+retin intr-o variabila j id-ul cartierului in care va fi livrat pachetul 
+(pachete[indice].idC); 
+- apoi adaug id-ul pachetului in vectorul cu pachete de distribuit al postasului
+cu id-ul j pe pozitia postasi[j].nP;
+- la final cresc numarul de pachete pe care postasul le are de distrbuit;
+
+Cerinta 4 
+- dupa ce pachetele sunt distribuite la cerinta 3, fiecare postas sorteaza
+pachetele descrescator in functie de prioritate si greutate;
+- apelez functia 'sortare';
+- functia 'sortare' are ca parametrii numarul de pachete pe care le distribuie 
+un postas (nrP - copie a lui postasi[indice].nP), vectorul de indici ai 
+pachetelor pe care postasul le distribuie (idP[] - vector care contine adresa 
+din memorie a primului element din vectorul postasi[indice].p_distrib[]) si 
+vectorul de stucturi pachet pachete[];
+- algoritmul de sortare folosit este cel prin interschimbare;
+- primul for merge de la 0 la nrP-1 si al doilea de la i+1 la nrP;
+- daca prioritatea pachetului corespunzator id-ului de pe pozitia i este mai
+mica decat a celui de pe pozitia j, interschimb folosind o variabila auziliara
+(aux) valorile lui idP[i] si idP[j];
+- daca valorile prioritatilor sunt egale atunci compar greutatile - in cazul 
+in care greuatatea pachetului corespunzator lui id[i] este mai mica decat a 
+lui id[j], interschimb folosinf variabila auxiliara aux valorile lui idP[i] si 
+idP[j];
+- dupa ce pachetele postasilor au fost sortare, apelez functia de afisare 
+pentru cerinta 4 (afisare_c3_c4);
+
+Cerinta 5 
+- parcurg pachetele si apelez functia 'inversare_text' (pentru a inversa ordinea
+cuvintelor si a elimina semnele de punctuatie din mesajul pachetelor) si apoi
+functia 'codificare_mesaj' (pentru a codifica mesajul pachetului);
+- functia 'inversare_text' are ca parametru un sir de caracter (*mesaj) si 
+returneaza tot sirul mesaj dupa ce au fost facute modificarile necesare; 
+- initializez un nou vector numit invers si il aloc dinamic;
+- initializez o pereche de indici st si dr cu (l-1 -lungimea lui mesaj-1) care 
+reprezinta inceputul, respectiv sfarsitul unui cuvant, si o variabila k cu 
+ajutorul careia voi copia literele din mesaj in invers; 
+- cu un while scad indicii st si dr pentru a fi sigura ca pornesc de pe o litera,
+un numar sau de pe caracterul '-' (cratima -care poate face parte dintr-un 
+cuvant);
+    - apoi cu un while parcurg sirul mesaj invers si cat timp pe pozitia st se 
+    afla o litera, un numar sau '-', decrementez indicele st;
+    - cand pe pozitia st se afla altceva, copiez in invers cuvantul dintre 
+    indicii st+1 si dr din mesaj;
+    - decrementez indicele st cat timp pe aceasta pozitie se afla un caracter
+    necorespunzator;
+    - ultima instructiune este cea prin care setez indicele dr cu valoarea lui
+    st astfel incat sa marcheze finalul urmatorului cuvant;  
+- dupa ce ies din while verific daca a mai ramas un cuvant necopiat la inceputul
+sirului mesaj, pe care il pun in invers;
+- marchez finalul sirului invers, copiez invers in mesaj, ii eliberez memoria si
+returnez sirul mesaj;
+- functia 'codificare_mesaj' are ca parametru un pachet p si returneaza codul 
+mesajului acestui pachte (un intreg - p.cod_mesaj);
+- mai intai calculez codul intermediar, care este suma codurilor ascii al 
+caracterelor din p.mesaj si pozitia lor si apoi calculez codul final conform 
+formulei : cod_final = cod % (numarul_casei * strada + 1);
+- returnez valoarea codului mesajului; 
+- dupa ce toate mesajele au fost codificate apelez functia de afisare pentru 
+cerinta 5 (afisare_c5);
+
+Cerinta 6 
+- apelez functia de afisare pentru cerinta 6 (afisare_c6) in cadrul careia vor 
+fi apelate celelalte functii necesare pentru alterarea codurilor care au cel 
+putin o cifra care se regaseste in id-ul postasului; 
+- functia 'afisare_c6' are ca parametrii nrC, nrP, postasi[], pachete[];
+- parcurg postasi si afisez id-ul postasului/cartierului si numarul de pachete 
+pe care il livreaza; 
+- daca postasi[indice].nP > 0 atunci apelez functia 'alterare_cod';
+- functia 'alterare_cod' are ca parametrii numarul de pachete, un postas P si 
+vectorul de structuri pachet pachete[];
+- parcurg pachetele pe care distribuie postasul P si afisez indicele pachetului 
+pe care il livreaza;
+- afisez indicele pachetului pe care postasul il livreaza;
+- folosind un while si o variabile de control ok verific daca una dintre cifrele
+id ului postasului se gaseste in codul mesajului : daca da ok ia valoarea lui 1
+si se iese din while;
+- daca ok este egat cu 1 inseama ca postasul va altera codul acestui mesaj si  
+apelez functia 'algoritm_alterare_cod';
+- functia 'algoritm_alterare_cod' are ca parametrii id ul postasului si codul 
+unui pachet (id si cod);
+    - daca id ul este 0 postasul modifica bitul 0 din cod, adica paritatea codului:
+    daca este par il cresc cu o unitate, daca este impar il scad cu o unitate;
+        - returnez valoarea alterata a codului;
+    - daca id ul este 1 verific folosind operatiile pe biti daca bitul de pe 
+    pozitia 1 este 1 sau 0 si il modific, apoi returnez val alterata a codului;
+    - altfel initializez varabila d (divizor) caruia ii dau valoarea 2 si folosind
+    algoritmul de descompunere in factori primi aflu divizorii primi ai id-ului;
+        - daca d este divizor pentru id si este mai mic sau egal cu 31 folosesc 
+        operatiile pe biti pentru a cerceta daca bitul de pe pozitia d este 1 sau
+        0 si il modific;
+        - il maresc pe d;
+    - returnez valoarea alterata a codului;  
+- ma reintorc functia 'alterare_cod' (daca a fost cazul);
+- in final afisez codul mesajului;
+
+Cerinta 7 
+- apelez functia de afisare pentru cerinta 7 'afisare_c7', care apeleaza la randul
+sau functia 'calculare_scor', daca postasul livreaza pachete;
+- daca postaul nu livreaza pachete scorul sau este 0;
+- functia 'calculare_scor' are ca parametii numarul de pachete, un postas P si
+vectorul de structuri pachet pachete[];
+    - initilializez varabila scor cu 0 (tip float) si variabila cnt cu 0 (intreg 
+    care va retine numarul de pachete pe care P le poate modifica)
+    - parcurg pachetele postasului P cu un for si folosind un while si o variabila 
+    de control ok verific daca exista vreo cifra din id-ul postasului in codul 
+    mesajului: daca da ok ia valoarea 1 si se iese din while;
+    - daca ok este egal cu 1 inseamna ca postasul poate modifica codul pachetului 
+    si incrementez varabila cnt;
+    - dupa for calculez scorul postasului dupa formula : 
+    scor = (float)(nr_total_pachete - cnt)/nr_total_pachete
+    si returnez scorul; 
+- dupa ce am calculat scorul afisez id-ul postasului si scorul acestuia cu 3 
+zecimale;
